@@ -42,23 +42,16 @@ This lab represents a made‑up hospital network. It has an edge firewall, a LAN
 
 ## Attacks Covered
 
-# | Attack | Layer | Status | Summary |
-
+| # | Attack | Layer | Status | Summary |
 |---|--------|-------|--------|---------|
+| 1 | SSH Brute Force (Hydra) | Application/Transport | Complete | Detected by Wazuh, mitigated with fail2ban |
+| 2 | ARP Spoofing | Layer 2 | Complete | 89% of ARP replies confirmed forged via tcpdump analysis; mitigated with a static ARP entry |
+| 3 | MAC/CAM Table Flooding | Layer 2 | Complete | No CAM table overflow observed; documented as a simulation limitation of the GNS3 software switch |
+| 4 | DHCP Starvation | Layer 2/3 | Complete | 150 of 150 fake clients received offers; mitigation requires managed-switch support not available in this topology |
+| 5 | DHCP Spoofing | Layer 2/3 | Complete | Rogue DHCP server competed with the legitimate server; legitimate server's offer was accepted; mitigation gap documented as above |
+| 6 | TCP SYN Flood | Layer 4 | Planned | — |
+| 7 | Nmap Port Scan (reconnaissance) | Layer 3/4 | Planned | — |
 
-| 1 | SSH Brute Force (Hydra) | Application/Transport Complete | Wazuh noticed the attack and fail2ban stopped it.
-
-| 2 | ARP Spoofing | Layer 2 | Complete | Most ARP replies were fake when checked with tcpdump. A static ARP entry fixed the problem. |
-
-| 3 | MAC/CAM Table Flooding | Layer 2 Complete | No overflow happened. This is a limitation of the GNS3 switch. |
-
-| 4 | DHCP Starvation | Layer 2/3 | Complete | All 150 fake clients got IP offers. A managed switch would help,. It is not in this lab. |
-
-5 | DHCP Spoofing | Layer 2/3 | Complete | A DHCP server fought with the real one. The servers offer was still used. The missing defense is noted. |
-
-6 | TCP SYN Flood | Layer 4 | Planned |. |
-
-| 7 | Nmap Port Scan (reconnaissance) Layer 3/4 | Planned |. |
 
 A full technical breakdown of each attack, evidence and mitigation is provided in the accompanying report (`docs/report.pdf`).
 
